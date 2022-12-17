@@ -20,10 +20,10 @@ if btn:
     sql = """
         CREATE TABLE IF NOT EXISTS to2021(
             "日付" NUMERIC, 
-            "問合せ種別" STRING, 
-            "関連する医薬品名" STRING, 
-            "質問内容" STRING, 
-            "回答内容" STRING
+            "category" STRING, 
+            "drug" STRING, 
+            "question" STRING, 
+            "answer" STRING
             );
     """
     cur.execute(sql)
