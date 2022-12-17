@@ -15,7 +15,7 @@ st.write('※このページからは情報の修正はできません。修正�
 if btn:
     db = sqlite3.connect('toiawase.db')
     cur = db.cursor()
-    
+    """
     #2021年までのデータテーブル作成
     sql = """
         CREATE TABLE IF NOT EXISTS to2021(
@@ -27,6 +27,7 @@ if btn:
             );
     """
     cur.execute(sql)
+    """
     #2022年以降のデータテーブル作成
     sql = """
         CREATE TABLE IF NOT EXISTS from2021(
