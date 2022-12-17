@@ -15,6 +15,32 @@ st.write('※このページからは情報の修正はできません。修正�
 if btn:
     db = sqlite3.connect('toiawase.db')
     cur = db.cursor()
+    
+    #2021年までのデータテーブル作成
+    sql = """
+        CREATE TABLE IF NOT EXISTS to2021(
+            "日付" NUMERIC, 
+            "問合せ種別" STRING, 
+            "関連する医薬品名" STRING, 
+            "質問内容" STRING, 
+            "回答内容" STRING
+            );
+    """
+    cur.execute(sql)
+    #2022年以降のデータテーブル作成
+    sql = """
+        CREATE TABLE IF NOT EXISTS from2021(
+            "日付" NUMERIC, 
+            "category" STRING, 
+            "drug" STRING, 
+            "question" STRING, 
+            "answer" STRING,
+            "reference" STRING
+            );
+    """
+    cur.execute(sql)
+    db.commit()
+    
     cur.execute("SELECT * FROM to2021 WHERE category LIKE ? OR drug LIKE ? OR question LIKE ? OR answer LIKE ?", 
                 [kensaku, kensaku, kensaku, kensaku])
     data = cur.fetchall()
@@ -50,3 +76,5 @@ if btn:
         st.write('【回答】')
         st.write(data[i][4])
         st.write('-------------------------------------------------------------------')
+    cur.close()
+    db.close()
